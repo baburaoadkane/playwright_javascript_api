@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
 import GoodsReceiptController from '../../lib/api/GoodsReceiptController.js';
-import payload from '../../test-data/goods-receipt.payload.json';
+import { goodsReceiptPayload } from '../../test-data/goods-receipt.payload.js';
 
 test('Create Goods Receipt - Success', async () => {
     const goodsReceiptApi = new GoodsReceiptController();
 
+    const payload = structuredClone(goodsReceiptPayload);
     const response = await goodsReceiptApi.createGoodsReceipt(payload);
 
     if (response.status() !== 200) {
