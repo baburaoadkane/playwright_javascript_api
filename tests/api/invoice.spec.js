@@ -1,13 +1,17 @@
 import { test, expect } from '@playwright/test';
 import InvoiceController from '../../lib/api/InvoiceController.js';
-import invoicePayload from '../../test-data/invoice.payload.json';
+import payload from '../../test-data/invoice.payload.json';
 
-test('Create Invoice - success', async () => {
+test('Create Invoice - Success', async () => {
     const invoiceApi = new InvoiceController();
 
-    const response = await invoiceApi.createInvoice(invoicePayload);
+    const response = await invoiceApi.createInvoice(payload);
 
-    expect(response.status()).toBe(200);    
+    if (response.status() !== 200) {
+        console.log(await response.text());
+    }
+
+    expect(response.status()).toBe(200);
 
     await invoiceApi.dispose();
 });
