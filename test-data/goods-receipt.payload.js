@@ -10,7 +10,7 @@ export const goodsReceiptPayload = {
     WarehouseCode: "WH01",
     SupplierCode: "3007",
     SupplierName: "",
-    ReferenceNum: "Invoice Test",
+    ReferenceNum: "API Test",
     MobileNum: "",
     Description: "Description",
     PaymentMethodCode: "",

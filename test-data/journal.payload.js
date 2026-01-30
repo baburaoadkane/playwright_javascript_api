@@ -6,7 +6,7 @@ export const journalPayload = {
         TxnCode: "GJV",
         TxnDate: getCurrentDate(),
         TxnNum: "",
-        ReferenceNum: "Journal Test",
+        ReferenceNum: "API Test",
         Description: "Description",
         JournalType: 1
     },

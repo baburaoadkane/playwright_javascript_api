@@ -1,6 +1,4 @@
-import {
-  generateItemDetails
-} from '../utils/item.util.js';
+import { generateItemDetails } from '../utils/item.util.js';
 
 export function itemPayload() {
   const { code, name, description } = generateItemDetails();
@@ -16,7 +14,7 @@ export function itemPayload() {
       CostingMethod: "1",
       ItemGroup: "",
       ItemCategory: "",
-      BaseUnitOfMeasure: "PC",
+      BaseUnitOfMeasure: "001",
       SalesPrice: "10",
       PurchasePrice: "10"
     }

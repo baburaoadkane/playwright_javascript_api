@@ -2,35 +2,47 @@ import { test, expect } from '@playwright/test';
 import ItemController from '../../lib/api/ItemController.js';
 import { itemPayload } from '../../test-data/item.payload.js';
 
-test('Create Item - Success', async () => {
-    const itemApi = new ItemController();
+let itemApi;
 
-    const payload = itemPayload();
-    const response = await itemApi.createItem(payload);
+test.beforeEach(async () => {
+    itemApi = new ItemController();
+});
 
-    if (!response.ok()) {
-        console.error('Create Item failed:', await response.text());
-    }
-
-    expect(response.status()).toBe(200);
-
+test.afterEach(async () => {
     await itemApi.dispose();
 });
 
-test.only('Get All Items', async () => {
-    const itemApi = new ItemController();
+test('Create Item - Success', async () => {
 
-    const response = await itemApi.getAllItems('2026-01-26T09:00:00', 0, 100);
+    await test.step('Create Item', async () => {
 
-    if (!response.ok()) {
-        console.error('Get All Items failed:', await response.text());
-    }
+        const payload = itemPayload();
+        const response = await itemApi.createItem(payload);
 
-    expect(response.status()).toBe(200);
+        if (!response.ok()) {
+            console.error('Create Item failed:', await response.text());
+        }
 
-    const body = await response.json();
-    expect(body.data.length).toBeGreaterThan(0);
+        expect(response.ok()).toBeTruthy();
+        expect(response.status()).toBe(200);
+    });
 
-    await itemApi.dispose();
+});
+
+test('Get All Items', async () => {
+
+    await test.step('Fetch all items', async () => {
+        const response = await itemApi.getAllItems('2026-01-26T09:00:00', 0, 100);
+
+        if (!response.ok()) {
+            console.error('Get All Items failed:', await response.text());
+        }
+
+        expect(response.ok()).toBeTruthy();
+        expect(response.status()).toBe(200);
+
+        const body = await response.json();
+        expect(body.data.length).toBeGreaterThan(0);
+    });
 
 });

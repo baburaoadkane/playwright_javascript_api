@@ -12,7 +12,7 @@ export const salesInvoicePayload = {
         DisplayCustomerName: "Test Customer",
         PaymentMethod: "",
         SalesmanCode: "",
-        ReferenceNum: "Invoice Test",
+        ReferenceNum: "API Test",
         MobileNum: "",
         Description: "Description",
         PriceListCode: "",
