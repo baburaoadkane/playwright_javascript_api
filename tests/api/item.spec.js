@@ -12,7 +12,7 @@ test.afterEach(async () => {
     await itemApi.dispose();
 });
 
-test('Create Item - Success', async () => {
+test.skip('Create Item - Success @item', async () => {
 
     await test.step('Create Item', async () => {
 

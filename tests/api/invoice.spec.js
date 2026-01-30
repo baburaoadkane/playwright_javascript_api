@@ -2,17 +2,29 @@ import { test, expect } from '@playwright/test';
 import InvoiceController from '../../lib/api/InvoiceController.js';
 import { salesInvoicePayload } from '../../test-data/invoice.payload.js';
 
-test('Create Invoice - Success', async () => {
-    const invoiceApi = new InvoiceController();
+let invoiceApi;
 
-    const payload = structuredClone(salesInvoicePayload);
-    const response = await invoiceApi.createInvoice(payload);
+test.beforeEach(() => {
+  invoiceApi = new InvoiceController();
+});
 
-    if (response.status() !== 200) {
-        console.log(await response.text());
-    }
+test.afterEach(async () => {
+  await invoiceApi.dispose();
+});
 
-    expect(response.status()).toBe(200);
+test('Create Invoice - Success @invoice', async () => {
 
-    await invoiceApi.dispose();
+    await test.step('Create Invoice', async () => {
+
+        const payload = salesInvoicePayload();
+        const response = await invoiceApi.createInvoice(payload);
+
+        if (!response.ok()) {
+            console.error('Create Invoice Failed:', await response.text());
+        }
+
+        expect(response.ok()).toBeTruthy();
+        expect(response.status()).toBe(200);
+    });
+
 });

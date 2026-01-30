@@ -2,17 +2,31 @@ import { test, expect } from '@playwright/test';
 import GoodsReceiptController from '../../lib/api/GoodsReceiptController.js';
 import { goodsReceiptPayload } from '../../test-data/goods-receipt.payload.js';
 
-test('Create Goods Receipt - Success', async () => {
+let goodsReceiptApi;
+
+test.beforeEach(() => {
+  goodsReceiptApi = new GoodsReceiptController();
+});
+
+test.afterEach(async () => {
+  await goodsReceiptApi.dispose();
+});
+
+test('Create Goods Receipt - Success @goodsreceipt', async () => {
     const goodsReceiptApi = new GoodsReceiptController();
 
-    const payload = structuredClone(goodsReceiptPayload);
-    const response = await goodsReceiptApi.createGoodsReceipt(payload);
+    await test.step('Create Goods Receipt', async () => {
 
-    if (response.status() !== 200) {
-        console.log(await response.text());
-    }
+        const payload = goodsReceiptPayload();
+        const response = await goodsReceiptApi.createGoodsReceipt(payload);
 
-    expect(response.status()).toBe(200);
+        if (!response.ok()) {
+            console.error('Create Goods Receipt Failed:', await response.text());
+        }
+
+        expect(response.ok()).toBeTruthy();
+        expect(response.status()).toBe(200);
+    });
 
     await goodsReceiptApi.dispose();
 });

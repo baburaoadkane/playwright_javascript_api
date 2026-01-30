@@ -2,17 +2,29 @@ import { test, expect } from '@playwright/test';
 import JournalController from '../../lib/api/JournalController.js';
 import { journalPayload } from '../../test-data/journal.payload.js';
 
-test('Create Journal - Success', async () => {
-  const journalApi = new JournalController();
+let journalApi;
 
-  const payload = structuredClone(journalPayload);
-  const response = await journalApi.createJournal(payload);
+test.beforeEach(async () => {
+  journalApi = new JournalController();
+});
 
-  if (response.status() !== 200) {
-    console.log(await response.text());
-  }
-
-  expect(response.status()).toBe(200);
-
+test.afterEach(async () => {
   await journalApi.dispose();
+});
+
+test('Create Journal - Success @journal', async () => {
+
+  await test.step('Create Journal', async () => {
+
+    const payload = journalPayload();
+    const response = await journalApi.createJournal(payload);
+
+    if (!response.ok()) {
+      console.error('Create Journal failed:', await response.text());
+    }
+
+    expect(response.ok()).toBeTruthy();
+    expect(response.status()).toBe(200);
+  });
+
 });
