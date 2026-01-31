@@ -29,11 +29,11 @@ test.skip('Item | Create | Validate -> Record created successfully',
 
     });
 
-test('Item | Items Fetch | Validate -> body should contain data',
-    { tag: ['@inventory', '@items-fetch'] },
+test('Item | Get Items | Validate -> body should contain data',
+    { tag: ['@inventory', '@items-get'] },
     async () => {
 
-        await test.step('Fetch all items', async () => {
+        await test.step('Get Items', async () => {
             const response = await itemApi.getAllItems('2026-01-26T09:00:00', 0, 100);
 
             expect(response.ok()).toBeTruthy();

@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-export function generateItemDetails(prefix = 'U') {
+export function generateBasicDetails(prefix = 'U00') {
   const code = `${prefix}${crypto.randomUUID().slice(0, 6).toUpperCase()}`;
 
   return {

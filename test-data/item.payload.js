@@ -1,7 +1,7 @@
-import { generateItemDetails } from '../utils/item.util.js';
+import { generateBasicDetails } from '../utils/item.util.js';
 
 export function itemPayload() {
-  const { code, name, description } = generateItemDetails();
+  const { code, name, description } = generateBasicDetails();
 
   return {
     ItemWM: {
