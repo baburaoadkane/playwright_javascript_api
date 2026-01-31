@@ -12,18 +12,20 @@ test.afterEach(async () => {
   await journalApi.dispose();
 });
 
-test('Create Journal - Success @journal-create', async () => {
+test('Journal | Create | Validate -> Record created successfully',
+  { tag: ['@accounting', '@journal-create'] },
+  async () => {
 
-  await test.step('Create Journal', async () => {
+    await test.step('Create Journal', async () => {
 
-    const payload = journalPayload();
-    const response = await journalApi.createJournal(payload);
-    
-    expect(response.ok()).toBeTruthy();
-    expect(response.status()).toBe(200);
+      const payload = journalPayload();
+      const response = await journalApi.createJournal(payload);
 
-    const responseText = await response.text();
-    expect(responseText).toContain('Record created successfully');
+      expect(response.ok()).toBeTruthy();
+      expect(response.status()).toBe(200);
+
+      const responseText = await response.text();
+      expect(responseText).toContain('Record created successfully');
+    });
+
   });
-
-});

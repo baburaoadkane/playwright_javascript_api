@@ -12,19 +12,21 @@ test.afterEach(async () => {
   await invoiceApi.dispose();
 });
 
-test('Create Invoice - Success @invoice-create', async () => {
+test('Invoice | Create | Validate -> successful: true',
+  { tag: ['@sales', '@invoice-create'] },
+  async () => {
 
-  await test.step('Create Invoice', async () => {
+    await test.step('Create Invoice', async () => {
 
-    const payload = salesInvoicePayload();
-    const response = await invoiceApi.createInvoice(payload);
+      const payload = salesInvoicePayload();
+      const response = await invoiceApi.createInvoice(payload);
 
-    expect(response.ok()).toBeTruthy();
-    expect(response.status()).toBe(200);
+      expect(response.ok()).toBeTruthy();
+      expect(response.status()).toBe(200);
 
-    const body = await response.json();
-    expect(body).toHaveProperty('successful', true);
-    expect(body).toHaveProperty('txnNum');
+      const body = await response.json();
+      expect(body).toHaveProperty('successful', true);
+      expect(body).toHaveProperty('txnNum');
+    });
+
   });
-
-});

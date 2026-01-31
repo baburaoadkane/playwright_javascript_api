@@ -12,18 +12,20 @@ test.afterEach(async () => {
   await goodsReceiptApi.dispose();
 });
 
-test('Create Goods Receipt - Success @goodsreceipt-create', async () => {
+test('Goods Receipt | Create | Validate -> response: true',
+  { tag: ['@purchase', '@goodsreceipt-create'] },
+  async () => {
 
-  await test.step('Create Goods Receipt', async () => {
+    await test.step('Create Goods Receipt', async () => {
 
-    const payload = goodsReceiptPayload();
-    const response = await goodsReceiptApi.createGoodsReceipt(payload);
+      const payload = goodsReceiptPayload();
+      const response = await goodsReceiptApi.createGoodsReceipt(payload);
 
-    expect(response.ok()).toBeTruthy();
-    expect(response.status()).toBe(200);
+      expect(response.ok()).toBeTruthy();
+      expect(response.status()).toBe(200);
 
-    const responseText = await response.text();
-    expect(responseText.toString()).toBe('true');
+      const responseText = await response.text();
+      expect(responseText.toString()).toBe('true');
+    });
+
   });
-
-});
