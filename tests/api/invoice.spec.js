@@ -4,7 +4,7 @@ import { salesInvoicePayload } from '../../test-data/invoice.payload.js';
 
 let invoiceApi;
 
-test.beforeEach(() => {
+test.beforeEach(async () => {
   invoiceApi = new InvoiceController();
 });
 
@@ -12,19 +12,19 @@ test.afterEach(async () => {
   await invoiceApi.dispose();
 });
 
-test('Create Invoice - Success @invoice', async () => {
+test('Create Invoice - Success @invoice-create', async () => {
 
-    await test.step('Create Invoice', async () => {
+  await test.step('Create Invoice', async () => {
 
-        const payload = salesInvoicePayload();
-        const response = await invoiceApi.createInvoice(payload);
+    const payload = salesInvoicePayload();
+    const response = await invoiceApi.createInvoice(payload);
 
-        if (!response.ok()) {
-            console.error('Create Invoice Failed:', await response.text());
-        }
+    expect(response.ok()).toBeTruthy();
+    expect(response.status()).toBe(200);
 
-        expect(response.ok()).toBeTruthy();
-        expect(response.status()).toBe(200);
-    });
+    const body = await response.json();
+    expect(body).toHaveProperty('successful', true);
+    expect(body).toHaveProperty('txnNum');
+  });
 
 });

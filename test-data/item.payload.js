@@ -7,7 +7,7 @@ export function itemPayload() {
     ItemWM: {
       Code: code,
       Name: name,
-      NameInArabic: "",
+      NameInArabic: name,
       Description: description,
       ItemType: "1",
       TrackingMode: "1",

@@ -12,21 +12,18 @@ test.afterEach(async () => {
   await goodsReceiptApi.dispose();
 });
 
-test('Create Goods Receipt - Success @goodsreceipt', async () => {
-    const goodsReceiptApi = new GoodsReceiptController();
+test('Create Goods Receipt - Success @goodsreceipt-create', async () => {
 
-    await test.step('Create Goods Receipt', async () => {
+  await test.step('Create Goods Receipt', async () => {
 
-        const payload = goodsReceiptPayload();
-        const response = await goodsReceiptApi.createGoodsReceipt(payload);
+    const payload = goodsReceiptPayload();
+    const response = await goodsReceiptApi.createGoodsReceipt(payload);
 
-        if (!response.ok()) {
-            console.error('Create Goods Receipt Failed:', await response.text());
-        }
+    expect(response.ok()).toBeTruthy();
+    expect(response.status()).toBe(200);
 
-        expect(response.ok()).toBeTruthy();
-        expect(response.status()).toBe(200);
-    });
+    const responseText = await response.text();
+    expect(responseText.toString()).toBe('true');
+  });
 
-    await goodsReceiptApi.dispose();
 });

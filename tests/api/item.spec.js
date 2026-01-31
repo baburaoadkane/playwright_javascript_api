@@ -12,36 +12,31 @@ test.afterEach(async () => {
     await itemApi.dispose();
 });
 
-test.skip('Create Item - Success @item', async () => {
+test.skip('Create Item - Success @item-create', async () => {
 
     await test.step('Create Item', async () => {
-
         const payload = itemPayload();
         const response = await itemApi.createItem(payload);
 
-        if (!response.ok()) {
-            console.error('Create Item failed:', await response.text());
-        }
-
         expect(response.ok()).toBeTruthy();
         expect(response.status()).toBe(200);
+
+        const responseText = await response.text();
+        expect(responseText).toContain('Record Created successfully');
     });
 
 });
 
-test('Get All Items', async () => {
+test('Fetch All Items  @item-fetch', async () => {
 
     await test.step('Fetch all items', async () => {
         const response = await itemApi.getAllItems('2026-01-26T09:00:00', 0, 100);
-
-        if (!response.ok()) {
-            console.error('Get All Items failed:', await response.text());
-        }
 
         expect(response.ok()).toBeTruthy();
         expect(response.status()).toBe(200);
 
         const body = await response.json();
+        expect(Array.isArray(body.data)).toBeTruthy();
         expect(body.data.length).toBeGreaterThan(0);
     });
 

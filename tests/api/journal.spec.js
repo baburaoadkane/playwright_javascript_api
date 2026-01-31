@@ -12,19 +12,18 @@ test.afterEach(async () => {
   await journalApi.dispose();
 });
 
-test('Create Journal - Success @journal', async () => {
+test('Create Journal - Success @journal-create', async () => {
 
   await test.step('Create Journal', async () => {
 
     const payload = journalPayload();
     const response = await journalApi.createJournal(payload);
-
-    if (!response.ok()) {
-      console.error('Create Journal failed:', await response.text());
-    }
-
+    
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
+
+    const responseText = await response.text();
+    expect(responseText).toContain('Record created successfully');
   });
 
 });
