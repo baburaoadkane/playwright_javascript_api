@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import CustomerController from '../../lib/api/CustomerController.js';
-import { customerPayload } from '../../test-data/customer.payload.js';
+import { customerPayload, customerCode } from '../../test-data/customer.payload.js';
 
 let customerApi;
 
@@ -36,13 +36,13 @@ test('Customer | Get | Validate -> body should contain data',
 
         await test.step('Get Customer By Code', async () => {
 
-            const customerCode = '0001';
-            const response = await customerApi.getCustomerByCode(customerCode);
+            const params = customerCode();
+            const response = await customerApi.getCustomerByCode(params);
 
             expect(response.ok()).toBeTruthy();
             expect(response.status()).toBe(200);
 
-            const body = await response.json();           
+            const body = await response.json();
 
             expect(body).toHaveProperty('code');
             expect(body).toHaveProperty('name');

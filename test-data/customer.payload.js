@@ -25,6 +25,6 @@ export function customerPayload() {
  * @param {string} code - Customer code
  * @returns {Object} Object with customer code
  */
-export function getCustomerByCode(code) {
-    return { Code: code };
+export function customerCode() {
+    return { CustomerCode: "0001" };
 }

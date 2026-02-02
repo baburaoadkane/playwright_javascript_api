@@ -9,7 +9,7 @@ export function goodsReceiptPayload() {
       TxnDate: txnDate,
       TxnNum: "",
       OperatingUnitCode: "OU01",
-      WarehouseCode: "WH01",
+      WarehouseCode: "WH001",
       SupplierCode: "3007",
       SupplierName: "",
       ReferenceNum: "API Test",

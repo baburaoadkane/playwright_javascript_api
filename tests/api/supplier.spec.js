@@ -13,7 +13,7 @@ test.afterEach(async () => {
 });
 
 test('Supplier | Create | Validate -> Record created successfully',
-    { tag: ['@purchase1', '@supplier-create'] },
+    { tag: ['@purchase', '@supplier-create'] },
     async () => {
 
         await test.step('Create Supplier', async () => {
@@ -31,7 +31,7 @@ test('Supplier | Create | Validate -> Record created successfully',
     });
 
 test('Supplier | Get | Validate -> body should contain data',
-    { tag: ['@purchase1', '@supplier-get'] },
+    { tag: ['@purchase', '@supplier-get'] },
     async () => {
 
         await test.step('Get Supplier By Code', async () => {

@@ -13,7 +13,7 @@ test.afterEach(async () => {
 });
 
 test('Salesman | Create | Validate -> Record created successfully',
-    { tag: ['@sales1', '@salesman-create'] },
+    { tag: ['@sales', '@salesman-create'] },
     async () => {
 
         await test.step('Create Salesman', async () => {

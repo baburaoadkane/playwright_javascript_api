@@ -9,7 +9,7 @@ export function salesInvoicePayload() {
             TxnDate: txnDate,
             TxnNum: "",
             OperatingUnitCode: "",
-            WarehouseCode: "WH01",
+            WarehouseCode: "WH001",
             CustomerCode: "187",
             DisplayCustomerName: "Test Customer",
             PaymentMethod: "",
@@ -42,5 +42,14 @@ export function salesInvoicePayload() {
                 TaxRateCode: ""
             }
         ]
+    }
+};
+
+export function invoiceDueAmount(){
+    return{
+        salesInvoiceId: "", 
+        txnNum: "100", 
+        txnInstanceCode:"INV", 
+        warehouseCode:"WH001"
     }
 };
